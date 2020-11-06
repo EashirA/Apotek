@@ -1,0 +1,38 @@
+﻿@model Apotek.ViewModels.ProductIndexVm.ProductListVm
+
+@{
+    ViewBag.Title = "ViewSingleProduct";
+}
+
+<h2 >@Model.ProductName</h2>
+
+<div>
+    <table class="table">
+        <tr>
+            <td>Product Name</td>
+            <td>@Model.ProductName</td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td>@Model.Price</td>
+        </tr>
+        <tr>
+            <td>Category Name</td>
+            <td>@Model.CategoryName</td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>@Model.ProductDetail</td>
+        </tr>
+    </table>
+</div>
+
+
+<div>
+    <p>
+        @Html.ActionLink("Products", "Product", new { })
+    </p>
+</div>
+
+
+

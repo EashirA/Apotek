@@ -1,0 +1,40 @@
+﻿@model Apotek.ViewModels.EditCatVm
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <table class="table">
+        <tr>
+            <th><h2>Edit Category</h2></th>
+            <th></th>
+        </tr>
+
+        <tr>
+            <td>@Html.ActionLink("Category", "Index", new { }, null)</td>
+            <td>
+                @Html.HiddenFor(m => m.CategoryId)
+                @Html.TextBoxFor(m => m.CategoryName)
+                @Html.ValidationMessageFor(m => m.CategoryName)
+            </td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>
+                @Html.TextAreaFor(p => p.Description)
+                @Html.ValidationMessageFor(p => p.Description)
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Save" />
+
+}
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

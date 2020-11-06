@@ -1,0 +1,68 @@
+﻿@model Apotek.ViewModels.ProductIndexVm
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @if (Model.CurrentSort == "ProductNameAsc")
+            {
+                @Html.ActionLink("Product", "Search",
+                    new { sort = "ProductNameDesc",
+                          searchString = Request.QueryString["searchString"] })
+            }
+            else
+            {
+                @Html.ActionLink("Product", "Search",
+                    new { sort = "ProductNameAsc",
+                          searchString = Request.QueryString["searchString"] })
+            }
+
+        </th>
+        <th>
+            @if (Model.CurrentSort == "ProductPriceAsc")
+            {
+                @Html.ActionLink("Price", "Search",
+                    new { sort = "ProductPriceDesc",
+                          searchString = Request.QueryString["searchString"] })
+            }
+            else
+            {
+                @Html.ActionLink("Price", "Search",
+                    new { sort = "ProductPriceAsc",
+                          searchString = Request.QueryString["searchString"] })
+            }
+        </th>
+        <th>Product Category</th>
+    </tr>
+
+    @foreach (var item in Model.Products)
+    {
+        <tr>
+            <td>@Html.ActionLink(item.ProductName, "ViewSingleProduct", "Product", 
+                    new { id = item.ProductId }, null)</td>
+            <td>@item.Price</td>
+            <td>@item.CategoryName</td>
+            @if (Request.IsAuthenticated)
+            {
+                <td>
+                    @Html.ActionLink(" Edit  ", "Edit", 
+                        new { id = item.ProductId }, new {}) |
+                    @Html.ActionLink(" Remove  ", "Delete", 
+                        new { id = item.ProductId }, 
+                        new { onclick = "return confirm('Är du säker?');" })
+                </td>
+            }
+        </tr>
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Products", "Product", new { }, null)
+</p>
+
+

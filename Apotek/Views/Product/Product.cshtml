@@ -1,0 +1,65 @@
+@model Apotek.ViewModels.ProductIndexVm
+
+@{
+    ViewBag.Title = "Product";
+}
+
+<h2>Products</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @if (Model.CurrentSort == "ProductNameAsc")
+            {
+                @Html.ActionLink("Product", "Product",
+                    new { sort = "ProductNameDesc", searchString = Request.QueryString["searchString"] })
+            }
+            else
+            {
+                @Html.ActionLink("Product", "Product",
+                    new { sort = "ProductNameAsc", searchString = Request.QueryString["searchString"] })
+            }
+
+        </th>
+        <th>
+            @if (Model.CurrentSort == "ProductPriceAsc")
+            {
+                @Html.ActionLink("Price", "Product",
+                    new { sort = "ProductPriceDesc", searchString = Request.QueryString["searchString"] })
+            }
+            else
+            {
+                @Html.ActionLink("Price", "Product",
+                    new { sort = "ProductPriceAsc", searchString = Request.QueryString["searchString"] })
+            }
+        </th>
+        <th> Category</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Products)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.ProductName, "ViewSingleProduct", "Product",
+                new { id = item.ProductId }, null)
+        </td>
+        <td>@item.Price</td>
+        <td>
+            @Html.ActionLink(item.CategoryName, "View", "Product",
+            new { id = item.CategoryId }, null)
+    </td>
+
+    @if (Request.IsAuthenticated)
+    {
+        <td>
+            @Html.ActionLink("Edit ", "Edit", new { id = item.ProductId }, new { }) |
+            @Html.ActionLink(" Remove", "Delete", new { id = item.ProductId },
+                new {onclick = "return confirm('Är du säker?');" })
+        </td>
+    }
+</tr>
+}
+
+</table>
+

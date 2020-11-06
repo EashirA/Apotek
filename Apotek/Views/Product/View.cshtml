@@ -1,0 +1,78 @@
+﻿@model Apotek.ViewModels.ProductIndexVm
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2 >@Html.DisplayFor(model => model.CategoryName)</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @if (Model.CurrentSort == "ProductNameAsc")
+                {
+                    @Html.ActionLink("Product", "View",
+                        new { sort = "ProductNameDesc",
+                            searchString = Request.QueryString["searchString"] })
+                }
+                else
+                {
+                    @Html.ActionLink("Product", "View",
+                        new { sort = "ProductNameAsc",
+                            searchString = Request.QueryString["searchString"] })
+                }
+            </th>
+            <th>
+                @if (Model.CurrentSort == "ProductPriceAsc")
+                {
+                    @Html.ActionLink("Price", "View",
+                        new { sort = "ProductPriceDesc",
+                            searchString = Request.QueryString["searchString"] })
+                }
+                else
+                {
+                    @Html.ActionLink("Price", "View",
+                        new { sort = "ProductPriceAsc",
+                            searchString = Request.QueryString["searchString"] })
+                }
+            </th>
+            <th>Product Detail</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>
+                    @item.ProductName
+                </td>
+                <td>
+                    @item.Price
+                </td>
+                <td>
+                    @item.ProductDetail
+                </td>
+                @if (Request.IsAuthenticated)
+                {
+                    <td>
+                        @Html.ActionLink(" Edit ", "Edit", new { id = item.ProductId }, new { }) |
+
+                        @Html.ActionLink(" Remove ", "Delete", new { id = item.ProductId }, 
+                            new { onclick = "return confirm('Är du säker?');" })
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<br />
+@if (Request.IsAuthenticated)
+{
+    @Html.ActionLink("Skapa ny", "Create", new { id = Model.CategoryId })
+}
+<p>
+    @Html.ActionLink("Products", "Product", "Product", new { }, null)
+</p>
+
+

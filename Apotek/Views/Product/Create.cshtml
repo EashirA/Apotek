@@ -1,0 +1,54 @@
+﻿@model Apotek.ViewModels.EditProductVm
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+@using (Html.BeginForm(FormMethod.Post))
+{
+
+    <table class="table">
+        @Html.HiddenFor(m => m.CategoryId)
+        <tr>
+            <td>Name</td>
+            <td>
+                @Html.TextBoxFor(m => m.ProductName, 
+                    new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.ProductName)
+            </td>
+        </tr>
+
+        <tr>
+            <td>Description</td>
+            <td>
+                @Html.TextAreaFor(m => m.ProductDetail, 
+                    new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.ProductDetail)
+            </td>
+        </tr>
+
+        <tr>
+            <td>Price</td>
+            <td>
+                @Html.TextBoxFor(m => m.ProductPrice, 
+                    new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.ProductPrice)
+            </td>
+        </tr>
+
+        <tr>
+            <td>Category</td>
+            <td>
+                @Html.TextBoxFor(m => m.CategoryName, 
+                    new {@class = "form-control", @readonly = "readonly"})
+            </td>
+        </tr>
+    </table>
+
+    <input type="submit" value="Save" class="btn btn-default"/>
+}
+<div>
+    @Html.ActionLink("Products", "Product")
+</div>
+

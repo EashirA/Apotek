@@ -1,0 +1,27 @@
+@model Apotek.ViewModels.CatIndexVm.CatListVm
+
+@{
+    ViewBag.Title = "View";
+}
+
+
+<table class="table">
+    <tr>
+        <th><h2>@Model.CategoryName</h2></th>
+        <th></th>
+    </tr>
+    <tr>
+
+        <td>@Html.ActionLink("Category", "Index", new { }, null)</td>
+        <td>@Model.CategoryName</td>
+    </tr>
+    <tr>
+        <td>Description</td>
+        <td>@Model.CategoryDescription</td>
+    </tr>
+
+</table>
+<p class="text-right" >All product in @Html.ActionLink(Model.CategoryName, "View", "Product", 
+                                  new { id = Model.CategoryId }, null) </p>
+
+

@@ -1,0 +1,40 @@
+﻿@model Apotek.ViewModels.ManageUserVm
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <table class="table">
+        @Html.HiddenFor(m => m.UserId)
+        @Html.HiddenFor(m => m.UserRoles)
+        <tr>
+            <td>Email</td>
+            <td>@Html.TextBoxFor(m => m.Email,
+                    new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>Username</td>
+            <td>@Html.TextBoxFor(m => m.UserName, 
+                    new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>Role</td>
+            <td>
+                @Html.DropDownListFor(m => m.DropDown, Model.UsersInSystem)
+            </td>
+        </tr>
+    </table>
+
+    <input type="submit" value="Save" class="btn btn-success" />
+
+    <br />
+
+    <div>
+        @Html.ActionLink("Users", "Index")
+    </div>
+
+}
